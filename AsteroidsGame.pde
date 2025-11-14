@@ -67,10 +67,10 @@ public void keyReleased(){
 public void moveShip(){
   //move according to keysPressed
   if (keysPressed[3] == 1){
-    for (int i = 0; i < stars.length; i++){
-    stars[i].hyperMove();
-    stars[i].show();
-  }
+    //for (int i = 0; i < stars.length; i++){
+    //stars[i].hyperMove();
+    //stars[i].show();
+  //}
   }
   if (keysPressed[0] == 1){
     bob.accelerate(0.1);
