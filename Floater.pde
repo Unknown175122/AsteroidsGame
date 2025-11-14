@@ -1,3 +1,4 @@
+ //0,0 is the center of rotation and start pointing to the right
 class Floater //Do NOT modify the Floater class! Make changes in the Spaceship class 
 {   
   protected int corners;  //the number of corners, a triangular floater has 3   
@@ -31,20 +32,24 @@ class Floater //Do NOT modify the Floater class! Make changes in the Spaceship c
     //wrap around screen    
     if(myCenterX >width)
     {     
-      myCenterX = 0;    
+      myCenterX = 0;
+      remap();
     }    
     else if (myCenterX<0)
     {     
-      myCenterX = width;    
+      myCenterX = width;
+      remap();
     }    
     if(myCenterY >height)
     {    
-      myCenterY = 0;    
+      myCenterY = 0;
+      remap();
     } 
     
     else if (myCenterY < 0)
     {     
-      myCenterY = height;    
+      myCenterY = height;
+      remap();
     }   
   }   
   public void show ()  //Draws the floater at the current position  
@@ -74,3 +79,10 @@ class Floater //Do NOT modify the Floater class! Make changes in the Spaceship c
     translate(-1*(float)myCenterX, -1*(float)myCenterY);
   }   
 } 
+
+
+
+
+
+
+
