@@ -1,9 +1,11 @@
 class Star{
-  private double myX, myY, s, dir;
+  private double myX, myY, s, dir, tempX, tempY;
   private double thingaling, tempdir;
   public Star(){
     myX = (int)(Math.random()*400);
     myY = (int)(Math.random()*400);
+    tempX = 0;
+    tempY = 0;
     s = (int)(Math.random()*3)+1;
     dir = (Math.random()*(2*Math.PI));
     
@@ -25,64 +27,53 @@ class Star{
   }
   
   public void hyperMove(){ //move 0.01 in direction
-    myX += Math.cos(tempdir)*thingaling;
-    myY += Math.sin(tempdir)*thingaling;
+    tempX += Math.cos(0)*thingaling;
+    tempY += Math.sin(0)*thingaling;
     thingaling -= thingaling/30;
 
   }
   
   public void show(){
-    ellipse((float)myX, (float)myY, (float)s, (float)s);
+    //fill(255-60+20*(float)thingaling, 255-30+10*(float)thingaling, 255);
+    //stroke(255-60+20*(float)thingaling, 255-30+10*(float)thingaling, 255);
+    translate((float)myX, (float)myY);
+    rotate((float)tempdir);
+    ellipse((float)tempX, (float)tempY, (float)s, (float)s);
+    rotate(-1*(float)tempdir);
+    translate(-1*(float)myX, -1*(float)myY);
   }
   
   public void setRandom(){
+    if (keysPressed[3] == 0){
     myX = (int)(Math.random()*400);
     myY = (int)(Math.random()*400);
     s = (int)(Math.random()*3)+1;
     dir = (Math.random()*(2*Math.PI));
-    
-    thingaling = 7;
-    
+    tempX = 0;
+    tempY = 0;
+    thingaling = 3;
+    } else{
+      thingaling += thingaling/4;
+    }
     //if (myX > 200){
     //  tempdir = 0;
     //} else if (myX < 200){  //11 is up
-    //  tempdir = 22;
+    //  tempdir = 22;hhhhhhhhh
     //}
     //setDir();
   }
   
-  //public void setDir(){
-  //  double ran = Math.random();
-  //  boolean greaterX = myX > 250 || (myX <= 250 && myX >= 150 && ran <= 0.5);
-  //  boolean middleY = myY <= 250 && myY >= 150;
-  //  boolean greaterY = myY > 250 || (myY <= 250 && myY >= 150 && ran <= 0.5);
-  //  boolean middleX = myX <= 250 && myX >= 150;
-  //  boolean lesserX = myX < 250 || (myX <= 250 && myX >= 150 && ran >= 0.5);
-  //  boolean lesserY = myY < 250 || (myY <= 250 && myY >= 150 && ran >= 0.5);
-  //  if ( greaterX && middleY){
-  //    tempdir = 0;
-  //  } else if (greaterX && lesserY){
-  //    tempdir = 5.5;
-  //  } else if (middleX && lesserY){
-  //    tempdir = 11;
-  //  } else if(lesserX && lesserY){
-  //    tempdir = 16.5;
-  //  } else if (lesserX && middleY){  //11 is up
-  //    tempdir = 22;
-  //  } else if (lesserX && greaterY){
-  //    tempdir = 27.5;
-  //  } else if (middleX && greaterY){
-  //    tempdir = 33;
-  //  } else{
-  //    tempdir = 38.5;
-  //  }
-  //  //if (myY > 250 || (myY <= 250 && myY >= 150 && ran <= 0.5)){
-  //  //  tempdir += 39;
-  //  //} else if (myY < 150){  //11 is up
-  //  //  tempdir += 17;
-  //  //}
-  //}
+  public void tempDir(){
+    if (myX > 200){
+    tempdir = Math.atan((myY-200)/( myX-200));
+    } else{
+      tempdir = 22+Math.atan((myY-200)/( myX-200));
+    }
+  }
   
 }
+
+
+
 
 
