@@ -1,4 +1,5 @@
 // I wanna make hyperspace really f##cking cool
+//holy cow its rly fckin cool
 Spaceship bob = new Spaceship();
 Star[] stars = new Star[200];
 int[] keysPressed = new int[4]; // 0 is up, 1 is left, 2 is right and 3 is hyperspace
@@ -49,7 +50,7 @@ public void keyPressed(){
   }}
   
   if (key == 'h'){ //have to build up speed before launching
-    if (keysPressed[3] == 0 && (Math.abs(bob.getXspeed())> 30 ||Math.abs(bob.getYspeed()) > 30)){
+    if (keysPressed[3] == 0 ){//&& (Math.abs(bob.getXspeed())> 30 ||Math.abs(bob.getYspeed()) > 30)){
       keysPressed[3] = 1;
       for (int i = 0; i < stars.length; i++){
         stars[i].tempDir();
@@ -111,8 +112,8 @@ public void remap(){ //remaps stars for hyperspace or when going offscreen
 
 public void collide(){
    for (int i = asteroids.size()-1; i>=0; i--){
-    if (asteroids.get(i).getX()-10<= bob.getX() && asteroids.get(i).getX()+15>= bob.getX()){ //if any car comes in range
-      if (asteroids.get(i).getY()-10<= bob.getY() && asteroids.get(i).getY()+10>= bob.getY()){
+    if (asteroids.get(i).getX()-14<= bob.getX() && asteroids.get(i).getX()+29>= bob.getX()){ //if any car comes in range
+      if (asteroids.get(i).getY()-14<= bob.getY() && asteroids.get(i).getY()+14>= bob.getY()){
             //System.out.println("boom");
             bob.bump();
         asteroids.remove(i); //smoke 'em
