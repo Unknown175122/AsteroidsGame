@@ -113,7 +113,7 @@ public void collide(){
    for (int i = asteroids.size()-1; i>=0; i--){
     if (asteroids.get(i).getX()-10<= bob.getX() && asteroids.get(i).getX()+15>= bob.getX()){ //if any car comes in range
       if (asteroids.get(i).getY()-10<= bob.getY() && asteroids.get(i).getY()+10>= bob.getY()){
-            System.out.println("boom");
+            //System.out.println("boom");
             bob.bump();
         asteroids.remove(i); //smoke 'em
       //points ++;
