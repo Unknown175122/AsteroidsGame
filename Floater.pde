@@ -8,7 +8,7 @@ class Floater //Do NOT modify the Floater class! Make changes in the Spaceship c
   protected double myCenterX, myCenterY; //holds center coordinates   
   protected double myXspeed, myYspeed; //holds the speed of travel in the x and y directions   
   protected double myPointDirection; //holds current direction the ship is pointing in degrees    
-
+  protected boolean wrapped;
   //Accelerates the floater in the direction it is pointing (myPointDirection)   
   public void accelerate (double dAmount)   
   {          
@@ -25,31 +25,32 @@ class Floater //Do NOT modify the Floater class! Make changes in the Spaceship c
   }   
   public void move ()   //move the floater in the current direction of travel
   {      
-    //change the x and y coordinates by myXspeed and myYspeed       
+    //change the x and y coordinates by myXspeed and myYspeed
     myCenterX += myXspeed;    
-    myCenterY += myYspeed;     
+    myCenterY += myYspeed;  
+    wrapped = false;
 
     //wrap around screen    
     if(myCenterX >width)
     {     
       myCenterX = 0;
-      remap();
+      wrapped = true;
     }    
     else if (myCenterX<0)
     {     
       myCenterX = width;
-      remap();
+      wrapped = true;
     }    
     if(myCenterY >height)
     {    
       myCenterY = 0;
-      remap();
+      wrapped = true;
     } 
     
     else if (myCenterY < 0)
     {     
       myCenterY = height;
-      remap();
+      wrapped = true;
     }   
   }   
   public void show ()  //Draws the floater at the current position  
@@ -78,8 +79,21 @@ class Floater //Do NOT modify the Floater class! Make changes in the Spaceship c
     rotate(-1*dRadians);
     translate(-1*(float)myCenterX, -1*(float)myCenterY);
   }   
+  
+  
+  public double getX(){
+    return myCenterX;
+  }
+  public double getY(){
+    return myCenterY;
+  }
+  public double getXspeed(){
+    return myXspeed;
+  }
+  public double getYspeed(){
+    return myYspeed;
+  }
 } 
-
 
 
 
