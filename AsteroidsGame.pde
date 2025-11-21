@@ -9,7 +9,7 @@ public void setup(){
   for (int i = 0; i < stars.length; i++){
     stars[i] = new Star();
   }
-  for (int i = 0; i < 10; i++){
+  for (int i = 0; i < 0; i++){
     asteroids.add(new Asteroid());
   }
   
@@ -50,7 +50,7 @@ public void keyPressed(){
   }}
   
   if (key == 'h'){ //have to build up speed before launching
-    if (keysPressed[3] == 0 ){//&& (Math.abs(bob.getXspeed())> 30 ||Math.abs(bob.getYspeed()) > 30)){
+    if (keysPressed[3] == 0 && (bob.getXspeed()> 30 ||bob.getYspeed() > 30 || bob.getXspeed()< -30 ||bob.getYspeed() < -30)){
       keysPressed[3] = 1;
       for (int i = 0; i < stars.length; i++){
         stars[i].tempDir();
@@ -120,11 +120,5 @@ public void collide(){
       //points ++;
     }} }
   }
-
-
-
-
-
-
 
 
