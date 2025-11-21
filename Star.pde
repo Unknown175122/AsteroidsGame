@@ -9,7 +9,7 @@ class Star{
     s = (int)(Math.random()*3)+1;
     dir = (Math.random()*(2*Math.PI));
     
-    thingaling = 3;
+    thingaling = 0;
     tempdir = 0;
     //setDir();
     //if (myY > 200 || (myY == 200 && Math.random() <= 0.5)){
@@ -51,6 +51,7 @@ class Star{
     dir = (Math.random()*(2*Math.PI));
     tempX = 0;
     tempY = 0;
+    tempdir = 0;
     thingaling = 3;
     } else{
       thingaling += thingaling/4;
@@ -64,6 +65,7 @@ class Star{
   }
   
   public void tempDir(){
+    //thingaling = 3;
     if (myX > 200){
     tempdir = Math.atan((myY-200)/( myX-200));
     } else{
@@ -72,8 +74,4 @@ class Star{
   }
   
 }
-
-
-
-
 
