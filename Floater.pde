@@ -93,12 +93,10 @@ class Floater //Do NOT modify the Floater class! Make changes in the Spaceship c
   public double getYspeed(){
     return myYspeed;
   }
+  public double getptdir(){
+    return myPointDirection;
+  }
 } 
-
-
-
-
-
 
 
 
