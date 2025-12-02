@@ -5,6 +5,7 @@ Star[] stars = new Star[200];
 int[] keysPressed = new int[4]; // 0 is up, 1 is left, 2 is right and 3 is hyperspace
 ArrayList <Asteroid> asteroids = new ArrayList <Asteroid>();
 ArrayList <Bullet> shots = new ArrayList <Bullet>(); //SHOTS SHOTS
+int health;
 public void setup(){
   size(400,400);
   for (int i = 0; i < stars.length; i++){
@@ -15,6 +16,7 @@ public void setup(){
   }
   
   keysPressed[3] = 0;
+  health = 3;
 }
 
 public void draw(){
@@ -38,7 +40,25 @@ public void draw(){
   }
   moveShip();
   collide();
-  
+  for (int i = 0; i < health; i ++){
+    drawHeart(i*25+5, 7);
+  }
+}
+
+public void drawHeart(int x, int y){
+  fill(255,130,130);
+  stroke(255,100,100);
+  beginShape();
+curveVertex(x+12,y+20);
+curveVertex(x+12,y+20);
+curveVertex(x+22,y+8);
+curveVertex(x+18,y+0);
+curveVertex(x+12,y+3);
+curveVertex(x+6,y+0);
+curveVertex(x+2,y+8);
+curveVertex(x+12,y+20);
+curveVertex(x+12,y+20);
+endShape();
 }
 
 public void keyPressed(){
@@ -131,6 +151,7 @@ public boolean ship2As(int i){
             //System.out.println("boom");
             bob.bump();
         asteroids.remove(i); //smoke 'em
+        health--;
         return true;
       //points ++;
     }}
