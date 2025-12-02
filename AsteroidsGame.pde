@@ -4,12 +4,13 @@ Spaceship bob = new Spaceship();
 Star[] stars = new Star[200];
 int[] keysPressed = new int[4]; // 0 is up, 1 is left, 2 is right and 3 is hyperspace
 ArrayList <Asteroid> asteroids = new ArrayList <Asteroid>();
+ArrayList <Bullet> shots = new ArrayList <Bullet>(); //SHOTS SHOTS
 public void setup(){
   size(400,400);
   for (int i = 0; i < stars.length; i++){
     stars[i] = new Star();
   }
-  for (int i = 0; i < 10; i++){
+  for (int i = 0; i < 15; i++){
     asteroids.add(new Asteroid());
   }
   
@@ -30,6 +31,10 @@ public void draw(){
   for (int i = 0; i < asteroids.size(); i++){
     asteroids.get(i).move();
     asteroids.get(i).show();
+  }
+  for (int i = 0; i < shots.size(); i++){
+    shots.get(i).move();
+    shots.get(i).show(i);
   }
   moveShip();
   collide();
@@ -56,6 +61,9 @@ public void keyPressed(){
         stars[i].tempDir();
       }
     }
+  }
+  if (key == 'z'){
+    shots.add(new Bullet(bob));
   }
 }
 
@@ -112,13 +120,31 @@ public void remap(){ //remaps stars for hyperspace or when going offscreen
 
 public void collide(){
    for (int i = asteroids.size()-1; i>=0; i--){
-    if (asteroids.get(i).getX()-14<= bob.getX() && asteroids.get(i).getX()+29>= bob.getX()){ //if any car comes in range
+     if (ship2As(i)){continue;}; //if hit asteroid wship no need to check same as
+     bull2As(i);
+   }
+}
+  
+public boolean ship2As(int i){
+  if (asteroids.get(i).getX()-14<= bob.getX() && asteroids.get(i).getX()+29>= bob.getX()){ //if any car comes in range
       if (asteroids.get(i).getY()-14<= bob.getY() && asteroids.get(i).getY()+14>= bob.getY()){
             //System.out.println("boom");
             bob.bump();
         asteroids.remove(i); //smoke 'em
+        return true;
       //points ++;
-    }} }
-  }
+    }}
+    return false;
+}
 
-
+public void bull2As(int i){
+  for (int j = shots.size()-1; j>=0;j--){
+    if (asteroids.get(i).getX()-10<= shots.get(j).getX() && asteroids.get(i).getX()+10>= shots.get(j).getX()){ //if any car comes in range
+        if (asteroids.get(i).getY()-10<= shots.get(j).getY() && asteroids.get(i).getY()+10>= shots.get(j).getY()){
+            //System.out.println("boom");
+          asteroids.remove(i); //smoke 'em
+          shots.remove(j);
+          break;
+      //points ++;
+    }}}
+}
