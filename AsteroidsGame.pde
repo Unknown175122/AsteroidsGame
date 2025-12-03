@@ -62,6 +62,10 @@ endShape();
 }
 
 public void keyPressed(){
+  if (key == 'z'){
+    shots.add(new Bullet(bob));
+    keysPressed[0] = 1;
+  }
   if (key == CODED){
   if (keyCode == UP){
     keysPressed[0] = 1;
@@ -81,10 +85,6 @@ public void keyPressed(){
         stars[i].tempDir();
       }
     }
-  }
-  if (key == 'z'){
-    shots.add(new Bullet(bob));
-    keysPressed[0] = 1;
   }
 }
 
