@@ -7,16 +7,16 @@ class Bullet extends Floater{
     myPointDirection = theship.getptdir();
     accelerate(6.0);
   }
-  //public void show(int index){
-  //  if (wrapped){
-  //    shots.remove(index); //put in here because last command of the loop
-  //  } else{
-  //    fill(0,255,0);
-  //    noStroke();
-  //    //ellipse((float)myCenterX,(float)myCenterY,10,10);
-  //    ellipse((float)myCenterX,(float)myCenterY,5,5);
-  //  }
-  //}
+  public void show(int index){
+    if (wrapped){
+      shots.remove(index); //put in here because last command of the loop
+    } else{
+      fill(0,255,0);
+      noStroke();
+      //ellipse((float)myCenterX,(float)myCenterY,10,10);
+      ellipse((float)myCenterX,(float)myCenterY,5,5);
+    }
+  }
   
 }
 
