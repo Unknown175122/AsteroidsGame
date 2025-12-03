@@ -5,15 +5,20 @@ class Bullet extends Floater{
     myXspeed = theship.getXspeed();
     myYspeed = theship.getYspeed();
     myPointDirection = theship.getptdir();
-    accelerate(0.6);
+    accelerate(6.0);
   }
   public void show(int index){
     if (wrapped){
       shots.remove(index); //put in here because last command of the loop
     } else{
-      fill(255);
-      ellipse((float)myCenterX,(float)myCenterY,10,10);
+      fill(0,255,0);
+      noStroke();
+      //ellipse((float)myCenterX,(float)myCenterY,10,10);
+      ellipse((float)myCenterX,(float)myCenterY,5,5);
     }
   }
   
 }
+
+
+
