@@ -16,7 +16,7 @@ public void setup(){
   }
   
   keysPressed[3] = 0;
-  health = 3;
+  health = 0;
   ammo = 3;
 }
 
@@ -24,9 +24,6 @@ public void draw(){
   //background(0, 255- 150*keysPressed[3]);
   fill(0, 255- 225*keysPressed[3]);
   rect(-10,0,410,400);
-  if (health == 0){
-    redraw();
-  }
   ammo = 3-shots.size();
   //bob.update();
   bob.move();
@@ -46,6 +43,14 @@ public void draw(){
   moveShip();
   collide();
   drawUI();
+  if (health <= 0){
+    fill(255,0,0);
+    textSize(20);
+    text("GAME OVER",145,180);
+    textSize(15);
+    text("Press space to retry",130,200);
+    noLoop();
+  }
 }
 
 public void keyPressed(){
@@ -72,6 +77,25 @@ public void keyPressed(){
   if (key == 'z'){
     if (ammo != 0){
     shots.add(new Bullet(bob));
+    }
+  }
+  if (key == ' '){
+    if (health <= 0){
+      health = 3;
+      for (int i = asteroids.size()-1; i >=0; i--){
+        asteroids.remove(0);
+      }
+      for (int i = shots.size()-1; i >=0; i--){
+        shots.remove(0);
+      }
+      for (int i = 0; i < 15; i++){
+        asteroids.add(new Asteroid());
+      }
+      ammo = 3;
+      bob.reset();
+      keysPressed[3] = 0;
+      remap();
+      loop();
     }
   }
 }
