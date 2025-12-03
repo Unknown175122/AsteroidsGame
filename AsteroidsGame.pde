@@ -16,7 +16,7 @@ public void setup(){
   }
   
   keysPressed[3] = 0;
-  health = 0;
+  health = 3;
   ammo = 3;
 }
 
