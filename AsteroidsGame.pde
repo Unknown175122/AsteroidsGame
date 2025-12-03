@@ -84,8 +84,7 @@ public void keyPressed(){
   }
   if (key == 'z'){
     shots.add(new Bullet(bob));
-    fill(0,0,255);
-rect(0,0,400,400);
+    keysPressed[0] = 1;
   }
 }
 
