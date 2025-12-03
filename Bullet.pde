@@ -5,8 +5,7 @@ class Bullet extends Floater{
     myXspeed = theship.getXspeed();
     myYspeed = theship.getYspeed();
     myPointDirection = theship.getptdir();
-    accelerate(6.0);
-rect(0,0,400,400);
+    accelerate(3.0);
   }
   public void show(int index){
     if (wrapped){
