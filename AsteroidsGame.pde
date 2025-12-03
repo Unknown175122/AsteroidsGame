@@ -63,7 +63,7 @@ endShape();
 
 public void keyPressed(){
   if (key == 'z'){
-    shots.add(new Bullet(bob));
+    //shots.add(new Bullet(bob));
     keysPressed[0] = 1;
   }
   if (key == CODED){
