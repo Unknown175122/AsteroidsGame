@@ -36,6 +36,8 @@ class Star{
   public void show(){
     //fill(255-60+20*(float)thingaling, 255-30+10*(float)thingaling, 255);
     //stroke(255-60+20*(float)thingaling, 255-30+10*(float)thingaling, 255);
+    fill(255);
+    stroke(255);
     translate((float)myX, (float)myY);
     rotate((float)tempdir);
     ellipse((float)tempX, (float)tempY, (float)s, (float)s);
@@ -74,4 +76,8 @@ class Star{
   }
   
 }
+
+
+
+
 
