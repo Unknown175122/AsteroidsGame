@@ -5,19 +5,15 @@ Star[] stars = new Star[200];
 int[] keysPressed = new int[4]; // 0 is up, 1 is left, 2 is right and 3 is hyperspace
 ArrayList <Asteroid> asteroids = new ArrayList <Asteroid>();
 ArrayList <Bullet> shots = new ArrayList <Bullet>(); //SHOTS SHOTS
-int health, ammo;
+int health, ammo, points, inv, wavenum;
 public void setup(){
   size(400,400);
   for (int i = 0; i < stars.length; i++){
     stars[i] = new Star();
   }
-  for (int i = 0; i < 15; i++){
-    asteroids.add(new Asteroid());
-  }
+  newWave();
   
-  keysPressed[3] = 0;
-  health = 3;
-  ammo = 3;
+  //wavenum = 1;
 }
 
 public void draw(){
@@ -27,7 +23,9 @@ public void draw(){
   ammo = 3-shots.size();
   //bob.update();
   bob.move();
-  bob.show();
+  if ((inv/10)%2 == 0){
+    bob.show();
+  }
   for (int i = 0; i < stars.length; i++){
     stars[i].move();
     stars[i].show();
@@ -43,6 +41,7 @@ public void draw(){
   moveShip();
   collide();
   drawUI();
+  if (inv > 0){inv--;}
   if (health <= 0){
     fill(255,0,0);
     textSize(20);
@@ -92,7 +91,9 @@ public void keyPressed(){
         asteroids.add(new Asteroid());
       }
       ammo = 3;
+      points = 0;
       bob.reset();
+      inv = 100;
       keysPressed[3] = 0;
       remap();
       loop();
@@ -106,6 +107,7 @@ public void keyReleased(){
       bob.hyperspace();
       keysPressed[3] = 0;
       remap();
+      //newWave();
     }
   }
   if (key == CODED){
@@ -153,20 +155,22 @@ public void remap(){ //remaps stars for hyperspace or when going offscreen
 
 public void collide(){
    for (int i = asteroids.size()-1; i>=0; i--){
-     if (ship2As(i)){continue;}; //if hit asteroid wship no need to check same as
+     if(inv == 0){ //if inv frames are off
+     if (ship2As(i)){continue;};} //if hit asteroid wship no need to check same as
      bull2As(i);
    }
 }
   
 public boolean ship2As(int i){
-  if (asteroids.get(i).getX()-14<= bob.getX() && asteroids.get(i).getX()+29>= bob.getX()){ //if any car comes in range
-      if (asteroids.get(i).getY()-14<= bob.getY() && asteroids.get(i).getY()+14>= bob.getY()){
+  if (asteroids.get(i).getX()-14<= bob.getX() && asteroids.get(i).getX()+27>= bob.getX()){ //if any car comes in range
+      if (asteroids.get(i).getY()-10<= bob.getY() && asteroids.get(i).getY()+10>= bob.getY()){
             //System.out.println("boom");
             bob.bump();
         asteroids.remove(i); //smoke 'em
         health--;
+        inv = 50;
+        //points ++;
         return true;
-      //points ++;
     }}
     return false;
 }
@@ -178,8 +182,8 @@ public void bull2As(int i){
             //System.out.println("boom");
           asteroids.remove(i); //smoke 'em
           shots.remove(j);
+          points ++;
           break;
-      //points ++;
     }}}
 }
 
@@ -192,7 +196,15 @@ public void drawUI(){
   }
   fill(0,255,255);
   noStroke();
-  arc(375,375,25,25,0,PI * ((float)Math.abs(bob.getXspeed())+(float)Math.abs(bob.getYspeed()))/30);
+  //arc(375,375,25,25,0,PI * ((float)Math.abs(bob.getXspeed())+(float)Math.abs(bob.getYspeed()))/30);
+  if (bob.getXspeed()>bob.getYspeed()){arc(375,375,25,25,0,PI * 2*((float)Math.abs(bob.getXspeed())/30));
+  }else{arc(375,375,25,25,0,PI * 2*((float)Math.abs(bob.getYspeed())/30));}
+  fill(0);
+  rect(175,0,60,15);
+  fill(255);
+  textSize(14);
+  text("Score: "+points, 175,15);
+  //text("Wave: "+wavenum, 0,385);
 }
 
 public void drawHeart(int x, int y){
@@ -227,4 +239,16 @@ curveVertex(x+17,y+25);
 curveVertex(x,y+25);
 curveVertex(x,y+25);
 endShape();
+}
+
+public void newWave(){
+  for (int i = 0; i < 15; i++){
+    asteroids.add(new Asteroid());
+  }
+  
+  keysPressed[3] = 0;
+  health = 3;
+  ammo = 3;
+  points = 0;
+  inv = 100;
 }
